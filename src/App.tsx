@@ -5,15 +5,17 @@ import './App.css'
 import { client, LIST_COUNTRIES } from "./gql/getData"
 import { useQuery } from '@apollo/client'
 import ListBox from './components/Listing Items/ListBox'
+import { useCountry } from './contexts/CountryContext'
 
 function App() {
   const [count, setCount] = useState(0);
+  const {setCountries}=useCountry();
   const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
 
   if (loading || error) return (
     <p>An error occured!</p>
   )
-
+  setCountries(data);
 
   return (
     <>
@@ -27,7 +29,7 @@ function App() {
       </div>
       <h1 className=''>Vite + React</h1>
       <div className="card">
-        <ListBox data={data} />
+        <ListBox/>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
