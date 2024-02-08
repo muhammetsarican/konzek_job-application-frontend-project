@@ -2,12 +2,12 @@ import { useCountry } from "../../contexts/CountryContext";
 import ListItem from "./ListItem";
 
 export default function ListBox() {
-    const {countries}=useCountry();
-    console.log(countries);
+    const {getCountries}=useCountry();
+    // console.log(getCountries);
     return (
-        <div className="border rounded-3xl p-5 bg-white">
+        <div className="border rounded-3xl p-5 bg-[#dee]">
             {
-                countries.countries.map((country: any) => (
+                getCountries().map((country: any) => (
                     <ListItem country={country}/>
                 ))
             }

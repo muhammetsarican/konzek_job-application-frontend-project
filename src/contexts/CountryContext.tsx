@@ -1,22 +1,42 @@
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext, useEffect, useState } from "react";
 
 type CountryContextType = {
     countries: any
     setCountries(value: any): void
+    filterNameText: any
+    setFilterNameText(value: any): void
+    getCountries():any
 }
 
 const CountryContext = createContext<CountryContextType>({
-    countries:[],
-    setCountries:()=>{}
+    countries: [],
+    setCountries: () => { },
+    filterNameText: "",
+    setFilterNameText: () => { },
+    getCountries: ()=>{}
 });
 
 const CountryProvider = ({ children }: any) => {
     const [countries, setCountries] = useState([]);
+    const [filterNameText, setFilterNameText] = useState("");
+
+    const getCountries=()=>{
+        if(filterNameText){
+            return countries.filter((country: any) => country.name.includes(filterNameText));
+        }
+        return countries;
+    }
+
+    useEffect(() => {
+        getCountries();
+    }, [filterNameText]);
 
     const values = {
         countries,
-        setCountries
+        setCountries,
+        filterNameText,
+        setFilterNameText,
+        getCountries
     }
     return (
         <CountryContext.Provider value={values}>
