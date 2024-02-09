@@ -24,17 +24,17 @@ function App() {
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={reactLogo} className="logo" alt="React logo" />
         </a>
       </div>
       <h1 className=''>Vite + React</h1>
-      <div className="filter-bar card">
+      <div className="filter-bar my-5">
         <FilterBar />
       </div>
-      <div className="countries-card card">
+      <div className="countries my-5">
         <ListBox />
       </div>
-      <p className="read-the-docs">
+      <p className="text-[#555]">
         Click on the Vite and React logos to learn more
       </p>
     </>

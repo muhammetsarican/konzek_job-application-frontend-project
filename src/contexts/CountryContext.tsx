@@ -3,9 +3,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 type CountryContextType = {
     countries: any
     setCountries(value: any): void
-    filterNameText: any
-    setFilterNameText(value: any): void
-    getCountries():any
+    filterNameText: string
+    setFilterNameText(value: string): void
+    filterGroupText: string
+    setFilterGroupText(value: string): void
+
+    getCountries(): any
 }
 
 const CountryContext = createContext<CountryContextType>({
@@ -13,15 +16,19 @@ const CountryContext = createContext<CountryContextType>({
     setCountries: () => { },
     filterNameText: "",
     setFilterNameText: () => { },
-    getCountries: ()=>{}
+    filterGroupText: "",
+    setFilterGroupText: () => { },
+
+    getCountries: () => { },
 });
 
 const CountryProvider = ({ children }: any) => {
     const [countries, setCountries] = useState([]);
     const [filterNameText, setFilterNameText] = useState("");
+    const [filterGroupText, setFilterGroupText] = useState("");
 
-    const getCountries=()=>{
-        if(filterNameText){
+    const getCountries = () => {
+        if (filterNameText) {
             return countries.filter((country: any) => country.name.includes(filterNameText));
         }
         return countries;
@@ -29,14 +36,16 @@ const CountryProvider = ({ children }: any) => {
 
     useEffect(() => {
         getCountries();
-    }, [filterNameText]);
+    }, [filterNameText, filterGroupText]);
 
     const values = {
         countries,
         setCountries,
         filterNameText,
         setFilterNameText,
-        getCountries
+        getCountries,
+        filterGroupText,
+        setFilterGroupText
     }
     return (
         <CountryContext.Provider value={values}>
