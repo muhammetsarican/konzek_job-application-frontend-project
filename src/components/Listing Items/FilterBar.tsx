@@ -4,31 +4,37 @@ export default function FilterBar() {
     const { setFilterNameText, setFilterGroupText } = useCountry();
 
     const parseFilterText = (filterText: string) => {
-        let groupString = "";
+        let groupString;
         let searchString = "";
         const isGroupStringExist = filterText.search("Group:");
-        const isSearchStringExist = filterText.search("Group:");
+        const isSearchStringExist = filterText.search("Search:");
 
         if (isGroupStringExist == -1 && isSearchStringExist == -1) return false;
 
         if (isGroupStringExist != -1) groupString = filterText.substring(isGroupStringExist, filterText.length);
 
-        if (isSearchStringExist != -1) searchString = filterText.substring(0, isSearchStringExist);
+        if (isSearchStringExist != -1) searchString = filterText.substring(0, isGroupStringExist != -1 ? isGroupStringExist : filterText.length);
 
+        console.log(searchString, groupString)
         return [searchString, groupString]
     }
     const filterChange = (e: any) => {
-        let filterTexts:any = parseFilterText(e.target.value);
+        let filterTexts: any = parseFilterText(e.target.value);
 
-        const searchText=filterTexts[0].split(":")[1].trim();
-        const groupText=filterTexts[1].split(":")[1].trim();
+        const searchText = filterTexts[0] ? filterTexts[0].split(":")[1].trim() : null;
+        const groupText = filterTexts[1] ? filterTexts[1].split(":")[1].trim() : null;
 
-        if (searchText!=0) {
+        if (searchText != null && searchText.length != 0) {
+            console.log(searchText);
             setFilterNameText(searchText);
+        } else {
+            setFilterNameText("");
         }
-        
-        if (groupText!=0) {
+
+        if (groupText != null && groupText.length != 0) {
             setFilterGroupText(groupText);
+        } else {
+            setFilterGroupText("");
         }
     }
     return (

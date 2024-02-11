@@ -1,12 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { parseGroupText } from "./Methods";
 
 type CountryContextType = {
-    countries: any
-    setCountries(value: any): void
+    countries: Array<any>
+    setCountries(value: Array<any>): void
     filterNameText: string
     setFilterNameText(value: string): void
     filterGroupText: string
     setFilterGroupText(value: string): void
+    countriesGroupValues: Array<string>
+    setCountriesGroupValues(value: Array<string>): void
 
     getCountries(): any
 }
@@ -18,17 +21,20 @@ const CountryContext = createContext<CountryContextType>({
     setFilterNameText: () => { },
     filterGroupText: "",
     setFilterGroupText: () => { },
+    countriesGroupValues: [],
+    setCountriesGroupValues: () => { },
 
     getCountries: () => { },
 });
 
 const CountryProvider = ({ children }: any) => {
-    const [countries, setCountries] = useState([]);
+    const [countries, setCountries] = useState<Array<any>>([]);
     const [filterNameText, setFilterNameText] = useState("");
     const [filterGroupText, setFilterGroupText] = useState("");
+    const [countriesGroupValues, setCountriesGroupValues] = useState<Array<string>>([]);
 
     const getCountries = () => {
-        if (filterNameText) {
+        if (filterNameText.length>0) {
             return countries.filter((country: any) => country.name.includes(filterNameText));
         }
         return countries;
@@ -38,14 +44,23 @@ const CountryProvider = ({ children }: any) => {
         getCountries();
     }, [filterNameText, filterGroupText]);
 
+    useEffect(() => {
+        const groupValues=parseGroupText({countries, filterGroupText});
+
+        setCountriesGroupValues(groupValues);
+    }, [filterGroupText]);
+
     const values = {
         countries,
         setCountries,
         filterNameText,
         setFilterNameText,
-        getCountries,
         filterGroupText,
-        setFilterGroupText
+        setFilterGroupText,
+        countriesGroupValues,
+        setCountriesGroupValues,
+
+        getCountries,
     }
     return (
         <CountryContext.Provider value={values}>

@@ -6,7 +6,7 @@ export default function ListItem({ country }: any) {
             <h3>{country.native}</h3>
             <h3>{country.capital}</h3>
             <h3>{country.currency}</h3>
-            <h3>{country.languages[0].name}</h3>
+            {/* <h3>{country.languages[0].name}</h3> */}
         </div>
     )
 }

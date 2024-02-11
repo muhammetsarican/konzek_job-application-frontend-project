@@ -3,16 +3,19 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { client, LIST_COUNTRIES } from "./gql/getData"
 import { useQuery } from '@apollo/client'
-import ListBox from './components/Listing Items/ListBox'
 import { useCountry } from './contexts/CountryContext'
 import FilterBar from './components/Listing Items/FilterBar'
+import ListGroup from './components/Listing Items/ListGroup'
 
 function App() {
   const { setCountries } = useCountry();
   const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
 
   if (loading || error) return (
-    <p>An error occured!</p>
+<div>
+      <h6>An error occured!</h6>
+      {/* <p>{error}</p> */}
+</div>
   )
 
   setCountries(data.countries);
@@ -32,7 +35,7 @@ function App() {
         <FilterBar />
       </div>
       <div className="countries my-5">
-        <ListBox />
+        <ListGroup />
       </div>
       <p className="text-[#555]">
         Click on the Vite and React logos to learn more
