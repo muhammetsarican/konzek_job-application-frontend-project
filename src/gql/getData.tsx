@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -6,23 +6,23 @@ const client = new ApolloClient({
 });
 
 const LIST_COUNTRIES = gql`
-{
-    countries(filter: { continent: { ne: "EU" }}) {
-        continent{
+  {
+      countries(filter: { continent: { ne: "EU" }, name:{regex:"^T"}}) {
+          continent{
+            name
+          }
           name
-        }
-        name
-        code
-        native
-        capital
-        emoji
-        currency
-        languages {
           code
-          name
+          native
+          capital
+          emoji
+          currency
+          languages {
+            code
+            name
+          }
         }
-      }
-}
+  }
 `
 
 export {

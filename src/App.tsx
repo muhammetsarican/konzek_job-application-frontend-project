@@ -1,25 +1,20 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { client, LIST_COUNTRIES } from "./gql/getData"
-import { useQuery } from '@apollo/client'
-import { useCountry } from './contexts/CountryContext'
 import FilterBar from './components/Listing Items/FilterBar'
 import ListGroup from './components/Listing Items/ListGroup'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const { setCountries } = useCountry();
-  const { data, loading, error } = useQuery(LIST_COUNTRIES, { client });
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    console.log("app comp mounted");
+    setIsMounted(true);
+  }, []);
 
-  if (loading || error) return (
-<div>
-      <h6>An error occured!</h6>
-      {/* <p>{error}</p> */}
-</div>
-  )
+  console.log("app comp rendered");
 
-  setCountries(data.countries);
-
+  if (!isMounted) return null;
   return (
     <>
       <div className='flex justify-center'>

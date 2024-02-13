@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { parseGroupText } from "./Methods";
+import { useQuery } from "@apollo/client";
+import { LIST_COUNTRIES } from "../gql/getData";
 
 type CountryContextType = {
     countries: Array<any>
@@ -29,12 +31,17 @@ const CountryContext = createContext<CountryContextType>({
 
 const CountryProvider = ({ children }: any) => {
     const [countries, setCountries] = useState<Array<any>>([]);
+    const {} = useQuery(LIST_COUNTRIES, {
+        onCompleted: (data) => {
+            setCountries(data.countries);
+        }
+    });
     const [filterNameText, setFilterNameText] = useState("");
     const [filterGroupText, setFilterGroupText] = useState("");
     const [countriesGroupValues, setCountriesGroupValues] = useState<Array<string>>([]);
 
     const getCountries = () => {
-        if (filterNameText.length>0) {
+        if (filterNameText.length > 0) {
             return countries.filter((country: any) => country.name.includes(filterNameText));
         }
         return countries;
@@ -45,7 +52,7 @@ const CountryProvider = ({ children }: any) => {
     }, [filterNameText, filterGroupText]);
 
     useEffect(() => {
-        const groupValues=parseGroupText({countries, filterGroupText});
+        const groupValues = parseGroupText({ countries, filterGroupText });
 
         setCountriesGroupValues(groupValues);
     }, [filterGroupText]);

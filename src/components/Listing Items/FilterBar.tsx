@@ -6,8 +6,8 @@ export default function FilterBar() {
     const parseFilterText = (filterText: string) => {
         let groupString;
         let searchString = "";
-        const isGroupStringExist = filterText.search("Group:");
-        const isSearchStringExist = filterText.search("Search:");
+        const isGroupStringExist = filterText.toLowerCase().search("group:");
+        const isSearchStringExist = filterText.toLowerCase().search("search:");
 
         if (isGroupStringExist == -1 && isSearchStringExist == -1) return false;
 
@@ -15,8 +15,7 @@ export default function FilterBar() {
 
         if (isSearchStringExist != -1) searchString = filterText.substring(0, isGroupStringExist != -1 ? isGroupStringExist : filterText.length);
 
-        console.log(searchString, groupString)
-        return [searchString, groupString]
+        return [searchString.toLowerCase(), groupString?.toLowerCase()]
     }
     const filterChange = (e: any) => {
         let filterTexts: any = parseFilterText(e.target.value);
