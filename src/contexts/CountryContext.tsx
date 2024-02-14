@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { LIST_COUNTRIES } from "../gql/getData";
 
 type CountryContextType = {
-    countries: Array<any>
+    countries: Array<object>
     setCountries(value: Array<any>): void
     filterNameText: string
     setFilterNameText(value: string): void
@@ -12,6 +12,9 @@ type CountryContextType = {
     setFilterGroupText(value: string): void
     countriesGroupValues: Array<string>
     setCountriesGroupValues(value: Array<string>): void
+
+    loading: boolean
+    error: any
 
     getCountries(): any
 }
@@ -26,12 +29,15 @@ const CountryContext = createContext<CountryContextType>({
     countriesGroupValues: [],
     setCountriesGroupValues: () => { },
 
+    loading: true,
+    error: {},
+
     getCountries: () => { },
 });
 
 const CountryProvider = ({ children }: any) => {
-    const [countries, setCountries] = useState<Array<any>>([]);
-    const {} = useQuery(LIST_COUNTRIES, {
+    const [countries, setCountries] = useState<Array<object>>([]);
+    const { loading, error } = useQuery(LIST_COUNTRIES, {
         onCompleted: (data) => {
             setCountries(data.countries);
         }
@@ -66,6 +72,9 @@ const CountryProvider = ({ children }: any) => {
         setFilterGroupText,
         countriesGroupValues,
         setCountriesGroupValues,
+
+        loading,
+        error,
 
         getCountries,
     }

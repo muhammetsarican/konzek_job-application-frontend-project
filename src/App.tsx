@@ -4,8 +4,10 @@ import './App.css'
 import FilterBar from './components/Listing Items/FilterBar'
 import ListGroup from './components/Listing Items/ListGroup'
 import { useEffect, useState } from 'react'
+import { useCountry } from './contexts/CountryContext'
 
 function App() {
+  const {loading, error}=useCountry();
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     console.log("app comp mounted");
@@ -15,6 +17,13 @@ function App() {
   console.log("app comp rendered");
 
   if (!isMounted) return null;
+  if (loading){
+     return (
+    <p>Loading...</p>
+  )}
+  if(error) return(
+    <p>{error.message}</p>
+  )
   return (
     <>
       <div className='flex justify-center'>

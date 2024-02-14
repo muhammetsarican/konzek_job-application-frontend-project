@@ -7,7 +7,7 @@ const client = new ApolloClient({
 
 const LIST_COUNTRIES = gql`
   {
-      countries(filter: { continent: { ne: "EU" }, name:{regex:"^T"}}) {
+      countries(filter: { continent: { ne: "EU" }}) {
           continent{
             name
           }

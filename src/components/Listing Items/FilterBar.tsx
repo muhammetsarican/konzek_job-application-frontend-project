@@ -1,7 +1,10 @@
-import { useCountry } from "../../contexts/CountryContext"
+import { useCountry } from "../../contexts/CountryContext";
+
 
 export default function FilterBar() {
     const { setFilterNameText, setFilterGroupText } = useCountry();
+
+    const capitalize=(text:string)=>text.charAt(0).toUpperCase()+text.slice(1);
 
     const parseFilterText = (filterText: string) => {
         let groupString;
@@ -24,8 +27,8 @@ export default function FilterBar() {
         const groupText = filterTexts[1] ? filterTexts[1].split(":")[1].trim() : null;
 
         if (searchText != null && searchText.length != 0) {
-            console.log(searchText);
-            setFilterNameText(searchText);
+            console.log(capitalize(searchText));
+            setFilterNameText(capitalize(searchText));
         } else {
             setFilterNameText("");
         }
