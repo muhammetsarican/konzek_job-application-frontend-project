@@ -1,30 +1,66 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# [Konzek](https://www.konzek.com/)-Job Application Project
 
-Currently, two official plugins are available:
+I created a web app that lists countries from trevorblades countries api. When I was developing this project I had so fun and I learned so much things. Same time it provided keep my knowledge fresh. Thanks to [Konzek](https://www.konzek.com/) for this project 👏.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Screenshots
 
-## Expanding the ESLint configuration
+![App Screenshot](https://i.imgur.com/ZIrx5L9.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+## Used Technologies
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+ReactJs
+Vite
+Typescript
+Tailwind
+GraphQL
+Trevorblades Country API
+```
+## Features
+
+- Responsive and grid design
+- More than 10 filtering options
+- Single page app
+- Simultaneously regeneration.
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/muhammetsarican/konzek_job-application-frontend-project.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+
+```bash
+  cd konzek_job-application-frontend-project
+
+```
+
+Install dependecies with npm 
+
+```bash
+  npm install
+```
+
+And run the project at your local
+
+```bash
+  npm run dev
+```
+
+Finally go the address that shown at terminal. Congrats 🎉
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at [muhammetsarican.com](https://muhammetsarican.com/contact)
+
+
+## Authors
+
+- [@muhammetsarican](https://www.github.com/muhammetsarican)
