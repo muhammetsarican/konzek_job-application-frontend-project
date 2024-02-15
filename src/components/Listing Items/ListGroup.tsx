@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { useCountry } from "../../contexts/CountryContext";
 import ListItem from "./ListItem";
+import { capitalize } from "../../contexts/Methods";
 
 function ListGroup() {
     const [isMounted, setIsMounted] = useState(false);
@@ -26,7 +27,7 @@ function ListGroup() {
                 countriesGroupValues.length != 0 && countriesGroupValues.map((groupValue: string, index: number) => {
                     return (
                         <div className={`p-5 bg-[#def] my-5 rounded-md ${isChildExist ? "block" : "hidden"}`} key={index}>
-                            <label className={`text-gray-700 text-center text-xs py-2 mb-3 border-2 border-gray-500 rounded-lg bg-[#dee] ${filterGroupText ? "block" : "hidden"}`}>{filterGroupText.charAt(0).toUpperCase() + filterGroupText.slice(1) + ": " + groupValue}</label>
+                            <label className={`text-gray-700 text-center text-xs py-2 mb-3 border-2 border-gray-500 rounded-lg bg-[#dee] ${filterGroupText ? "block" : "hidden"}`}>{capitalize(filterGroupText) + ": " + groupValue}</label>
                             <div className="grid grid-cols-5 gap-1">
                                 {getCountries().map((country: any, index: number) => {
                                     if (groupValue != null && country[filterGroupText] == groupValue) {
@@ -34,9 +35,7 @@ function ListGroup() {
                                             setIsChildExist(true)
                                         };
                                         return (
-                                            //<div className="border rounded-3xl p-5 bg-[#dee] shadow-xl m-2" key={country.code}>
                                             <ListItem country={country} key={index} counter={setCounter(1)} getCounter={getCounter} />
-                                            //</div>
                                         )
                                     }
                                     return null;
@@ -48,7 +47,7 @@ function ListGroup() {
             }
             {
                 countriesGroupValues.length == 0 && (
-                    <div className={`p-2 bg-[#def] my-5 rounded-md`}>
+                    <div className={`p-5 bg-[#def] my-5 rounded-md`}>
                         <label className={`text-gray-700 text-center text-xs py-2 mb-3 border-2 border-gray-500 rounded-lg bg-[#dee] block`}>Group: All</label>
                         <div className="grid grid-cols-5 gap-1">
                             {

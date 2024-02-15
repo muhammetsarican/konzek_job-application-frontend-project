@@ -11,6 +11,10 @@ const parseGroupText = (countries:any,{ filterGroupText }: ParseGroupTextType) =
 
     return groupValues.filter((value: any, index: any, array: any) => array.indexOf(value) === index);
 }
+
+const capitalize=(text:string)=>text.charAt(0).toUpperCase()+text.slice(1);
+
 export {
     parseGroupText,
+    capitalize
 }

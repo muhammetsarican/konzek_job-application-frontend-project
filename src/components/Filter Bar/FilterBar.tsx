@@ -1,10 +1,9 @@
 import { useCountry } from "../../contexts/CountryContext";
+import { capitalize } from "../../contexts/Methods";
 
 
 export default function FilterBar() {
     const { setFilterNameText, setFilterGroupText } = useCountry();
-
-    const capitalize=(text:string)=>text.charAt(0).toUpperCase()+text.slice(1);
 
     const parseFilterText = (filterText: string) => {
         let groupString;
