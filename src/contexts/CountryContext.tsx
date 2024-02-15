@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { parseGroupText } from "./Methods";
 import { useQuery } from "@apollo/client";
 import { LIST_COUNTRIES } from "../gql/GetData";
-import ConvertCountry from "../schema/CountrySchema";
+import { ConvertCountry } from "../schema/CountrySchema";
 
 type CountryContextType = {
     countries: Array<object>
@@ -37,6 +37,7 @@ const CountryContext = createContext<CountryContextType>({
 });
 
 const CountryProvider = ({ children }: any) => {
+    // Hooks
     const [countries, setCountries] = useState<Array<object>>([]);
     const { loading, error } = useQuery(LIST_COUNTRIES, {
         onCompleted: (data) => {
@@ -47,13 +48,6 @@ const CountryProvider = ({ children }: any) => {
     const [filterGroupText, setFilterGroupText] = useState("");
     const [countriesGroupValues, setCountriesGroupValues] = useState<Array<string>>([]);
 
-    const getCountries = () => {
-        if (filterNameText.length > 0) {
-            return countries.filter((country: any) => country.name.includes(filterNameText));
-        }
-        return countries;
-    }
-
     useEffect(() => {
         getCountries();
         if (filterGroupText) {
@@ -63,7 +57,16 @@ const CountryProvider = ({ children }: any) => {
         }
         else setCountriesGroupValues([]);
     }, [filterNameText, filterGroupText]);
+    
+    // Methods
+    const getCountries = ():Array<object> => {
+        if (filterNameText.length > 0) {
+            return countries.filter((country: any) => country.name.includes(filterNameText));
+        }
+        return countries;
+    }
 
+    // Variables
     const values = {
         countries,
         setCountries,

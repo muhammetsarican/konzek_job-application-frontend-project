@@ -1,18 +1,18 @@
-const CountrySchema = (country: any) => {
+const CountrySchema = (country:any|null):object => {
     return {
-        continent_name: country.continent.name,
-        name: country.name,
-        code: country.code,
-        native: country.native,
-        capital: country.capital,
-        emoji: country.emoji,
-        currency: country.currency,
-        phone: country.phone,
-        aws_region: country.awsRegion,
-        language_name: country.languages.length!=0? country.languages[0].name : null,
+        continent_name: country?country.continent.name:null,
+        name: country?country.name:null,
+        code: country?country.code:null,
+        native: country?country.native:null,
+        capital: country?country.capital:null,
+        emoji: country?country.emoji:null,
+        currency: country?country.currency:null,
+        phone: country?country.phone:null,
+        aws_region: country?country.awsRegion:null,
+        language_name: country?country.languages.length!=0? country.languages[0].name : null:null,
     }
 }
-const ConvertCountry = (countries: Array<object>) => {
+const ConvertCountry = (countries: Array<object>):Array<object> => {
     let newCountries: Array<object> = [];
     countries.map((country: object) => {
         newCountries.push(CountrySchema(country));
@@ -21,4 +21,7 @@ const ConvertCountry = (countries: Array<object>) => {
     return newCountries;
 }
 
-export default ConvertCountry;
+export {
+    ConvertCountry,
+    CountrySchema
+};

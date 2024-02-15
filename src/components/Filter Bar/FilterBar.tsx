@@ -1,13 +1,14 @@
 import { useCountry } from "../../contexts/CountryContext";
-import { capitalize } from "../../contexts/Methods";
-
+import { capitalize, checkGroupValue } from "../../contexts/Methods";
 
 export default function FilterBar() {
+    // Hooks
     const { setFilterNameText, setFilterGroupText } = useCountry();
 
-    const parseFilterText = (filterText: string) => {
+    // Methods
+    const parseFilterText = (filterText: string):Array<string|undefined>|boolean => {
         let groupString;
-        let searchString = "";
+        let searchString;
         const isGroupStringExist = filterText.toLowerCase().search("group:");
         const isSearchStringExist = filterText.toLowerCase().search("search:");
 
@@ -17,9 +18,9 @@ export default function FilterBar() {
 
         if (isSearchStringExist != -1) searchString = filterText.substring(0, isGroupStringExist != -1 ? isGroupStringExist : filterText.length);
 
-        return [searchString.toLowerCase(), groupString?.toLowerCase()]
+        return [searchString?.toLowerCase(), groupString?.toLowerCase()]
     }
-    const filterChange = (e: any) => {
+    const filterChange = (e: any):void => {
         let filterTexts: any = parseFilterText(e.target.value);
 
         const searchText = filterTexts[0] ? filterTexts[0].split(":")[1].trim() : null;
@@ -31,16 +32,19 @@ export default function FilterBar() {
             setFilterNameText("");
         }
 
-        if (groupText != null && groupText.length != 0) {
+        if (groupText != null && groupText.length != 0 && checkGroupValue(groupText)) {
             setFilterGroupText(groupText);
         } else {
             setFilterGroupText("");
         }
     }
+    const clearText=(event:any):void=>{
+        event.target.value=""
+    }
     return (
         <div className="flex bg-[#dee] rounded-md p-5 justify-start items-center gap-2">
             <label htmlFor="filter-countries" className="text-gray-800">Filter:</label>
-            <input onChange={filterChange} type="text" name="filter-countries" id="filter-countries" className="rounded-md border p-2 bg-white shadow-lg w-full text-gray-700" placeholder="Enter your filter keyword" />
+            <input onChange={filterChange} onClick={clearText} type="text" name="filter-countries" id="filter-countries" className="rounded-md border p-2 bg-white shadow-lg w-full text-gray-700" placeholder="Enter your filter keyword" />
         </div>
     )
 }
