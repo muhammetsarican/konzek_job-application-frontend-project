@@ -17,6 +17,8 @@ const LIST_COUNTRIES = gql`
           capital
           emoji
           currency
+          phone
+          awsRegion
           languages {
             code
             name

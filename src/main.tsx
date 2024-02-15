@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import { CountryProvider } from './contexts/CountryContext.tsx'
 import { ApolloProvider } from '@apollo/client'
-import { client } from './gql/getData.tsx'
+import { client } from './gql/GetData.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

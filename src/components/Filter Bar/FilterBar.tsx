@@ -27,7 +27,6 @@ export default function FilterBar() {
         const groupText = filterTexts[1] ? filterTexts[1].split(":")[1].trim() : null;
 
         if (searchText != null && searchText.length != 0) {
-            console.log(capitalize(searchText));
             setFilterNameText(capitalize(searchText));
         } else {
             setFilterNameText("");
@@ -40,7 +39,7 @@ export default function FilterBar() {
         }
     }
     return (
-        <div className="flex bg-[#dee] rounded-xl p-5 justify-start items-center gap-2">
+        <div className="flex bg-[#dee] rounded-md p-5 justify-start items-center gap-2">
             <label htmlFor="filter-countries" className="text-gray-800">Filter:</label>
             <input onChange={filterChange} type="text" name="filter-countries" id="filter-countries" className="rounded-md border p-2 bg-white shadow-lg w-full text-gray-700" placeholder="Enter your filter keyword" />
         </div>

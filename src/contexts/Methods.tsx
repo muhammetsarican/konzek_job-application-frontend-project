@@ -1,10 +1,9 @@
 type ParseGroupTextType = {
-    countries: Array<any>,
     filterGroupText: any
 }
-const parseGroupText = ({ countries, filterGroupText }: ParseGroupTextType) => {
+const parseGroupText = (countries:any,{ filterGroupText }: ParseGroupTextType) => {
     let groupValues: string[] = [];
-    countries.map((country) => {
+    countries.map((country:any) => {
         if (groupValues.length == 0 || Boolean(groupValues.find((value: string) => value != country[filterGroupText]))) {
             groupValues = [...groupValues, country[filterGroupText]];
         }

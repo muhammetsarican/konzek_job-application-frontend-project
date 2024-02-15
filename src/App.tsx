@@ -1,13 +1,11 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import FilterBar from './components/Listing Items/FilterBar'
-import ListGroup from './components/Listing Items/ListGroup'
 import { useEffect, useState } from 'react'
 import { useCountry } from './contexts/CountryContext'
+import InfoBar from './components/Info Bar/InfoBar'
+import FilterBar from './components/Filter Bar/FilterBar'
+import ListGroup from './components/Listing Items/ListGroup'
 
 function App() {
-  const {loading, error}=useCountry();
+  const { loading, error } = useCountry();
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     console.log("app comp mounted");
@@ -17,35 +15,32 @@ function App() {
   console.log("app comp rendered");
 
   if (!isMounted) return null;
-  if (loading){
-     return (
-    <p>Loading...</p>
-  )}
-  if(error) return(
-    <p>{error.message}</p>
+  if (loading) {
+    return (
+      <p className='text-3xl'>Loading...</p>
+    )
+  }
+  if (error) return (
+    <p className='text-3xl'>{error.message}</p>
   )
   return (
-    <>
-      <div className='flex justify-center'>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo" alt="React logo" />
-        </a>
+    <div className="container-fluid flex justify-center">
+      <div className='container mx-auto'>
+        <div className='flex justify-center'>
+          <InfoBar />
+        </div>
+        <div className="my-5">
+          <FilterBar />
+        </div>
+        <div className="my-5">
+          <ListGroup />
+        </div>
+        <p className="text-[#555]">
+          Click on the Vite and React logos to learn more
+        </p>
       </div>
-      <h1 className=''>Vite + React</h1>
-      <div className="filter-bar my-5">
-        <FilterBar />
-      </div>
-      <div className="countries my-5">
-        <ListGroup />
-      </div>
-      <p className="text-[#555]">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
-export default App
+export default App;
