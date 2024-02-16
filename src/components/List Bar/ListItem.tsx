@@ -25,7 +25,7 @@ function ListItem({ country, counter, getCounter }: ListItemInterface) {
     }, [getCounter()])
 
     // Variables
-    const checkedBoxColor = 'bg-[#F67400]';
+    const checkedBoxColors = ['bg-[#F67400]','bg-[#FF79C6]', 'bg-[#26A65B]'];
 
     // Methods
     const selectOrUnselectItem = ():void => {
@@ -34,7 +34,7 @@ function ListItem({ country, counter, getCounter }: ListItemInterface) {
 
     if (!isMounted) return null;
     return (
-        <div key={country.code} onClick={selectOrUnselectItem} className={`grid grid-cols-1 gap-3 justify-center shadow-lg text-black m-3 rounded-md ${isObjectSelected ? `${checkedBoxColor} text-white border-4 border-white p-1` : "bg-white p-2"}`}>
+        <div key={country.code} onClick={selectOrUnselectItem} className={`grid grid-cols-1 gap-3 justify-center shadow-lg text-black m-3 rounded-md ${isObjectSelected ? `${checkedBoxColors[counter%3]} text-white border-4 border-white p-1` : "bg-white p-2"}`}>
             <p className="w-full text-xs"><b>Number: </b>{counter}</p>
             <p className="w-full text-xs"><b>Continent: </b>{country.continent_name}</p>
             <p className="w-full text-xs"><b>Flag: </b>{country.emoji}</p>
